@@ -1,24 +1,14 @@
 #pragma warning(disable:4996)
 #include<stdio.h>
 #include<time.h>//C언어 표준 라이브러리. 시간/날짜를 얻고 조작
-#include<conio.h>//콘솔 입출력 제궁
-#include<malloc.h>
+#include<conio.h>//콘솔 입출력 제공
 #include"Screen.h"
+#include"fps.h"
 
-clock_t FPSCurTime, FPSOldTime;
-int FrameCnt;
-char* FPSTextBuffer;
-//int temp;
-//char* stemp;
 
 void Init() 
 {
-	//temp = 0;
-	FrameCnt = 0;
-	FPSTextBuffer = (char*)malloc(sizeof(char) * 10);
-	//stemp = (char*)malloc(sizeof(char) * 1000);
-	sprintf(FPSTextBuffer,"FPS : %d",FrameCnt);
-	FPSOldTime = clock();
+	
 }
 
 void Update() 
@@ -29,23 +19,12 @@ void Update()
 void Render()
 {
 	ScreenClear();
-	FrameCnt++;
-	//temp++;
-	FPSCurTime = clock();
-	if (FPSCurTime - FPSOldTime >= 1000) {
-		sprintf(FPSTextBuffer, "FPS : %d", FrameCnt);
-		FPSOldTime = clock();
-		FrameCnt = 0;
-	}
-	ScreenPrint(0, 0, FPSTextBuffer);
-	//sprintf(stemp, "%d", temp);
-	//ScreenPrint(0,0,stemp);
 	ScreenFlipping();
 }
 
 void Release()
 {
-	free(FPSTextBuffer);
+
 }
 
 int main() //초기화->((반복)데이터갱신->화면출력)->해제
