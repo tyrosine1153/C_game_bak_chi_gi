@@ -1,9 +1,12 @@
+#pragma warning(disable:4996)
 #include"fps.h"
+#include"Screen.h"
 
 void InitFPSData(FPSData** fpsData)
 {
 	(*fpsData) = (FPSData*)malloc(sizeof(FPSData));
 	(*fpsData)->FrameCnt = 0;
+	(*fpsData)->FPSTextBuffer = (char*)malloc(sizeof(char) * 10);
 	sprintf((*fpsData)->FPSTextBuffer, "FPS : %d", (*fpsData)->FrameCnt);
 	(*fpsData)->FPSOldTime = clock();
 }
