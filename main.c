@@ -6,10 +6,31 @@
 #include"fps.h"
 
 FPSData* fpsData;
+char PLAYER_STR[] = "¦¦¦¡¡Ü¦¡¦¥";
+typedef struct _Position
+{
+	int x, y;
+}Position;
+
+typedef struct
+{
+	Position position;
+	char* strPlayer;
+	int nLength;
+}Player;
+
+Player g_Player;
 
 void Init()
 {
 	InitFPSData(&fpsData);
+	g_Player.position.x = 0;
+	g_Player.position.y = 22;
+
+	g_Player.nLength = strlen(PLAYER_STR);
+
+	g_Player.strPlayer = (char*)malloc(sizeof(char) * g_Player.nLength);
+	strcpy(g_Player.strPlayer, PLAYER_STR);
 }
 
 void Update()
