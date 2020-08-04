@@ -15,6 +15,7 @@ typedef struct _Position
 typedef struct
 {
 	Position position;
+	Position center;
 	char* strPlayer;
 	int nLength;
 }Player;
@@ -24,8 +25,10 @@ Player g_Player;
 void Init()
 {
 	InitFPSData(&fpsData);
-	g_Player.position.x = 0;
+	g_Player.position.x = 4;
 	g_Player.position.y = 22;
+	g_Player.center.x = 4;
+	g_Player.center.y = 0;
 
 	g_Player.nLength = strlen(PLAYER_STR);
 
@@ -42,6 +45,22 @@ void Render()
 {
 	ScreenClear();
 	DrawFPS(&fpsData);
+
+	char string[100] = { 0, };
+	int printX = g_Player.position.x - g_Player.center.x;
+	if (printX > 0) //왼쪽 팔이 경계를 넘어갔을 경우
+	{
+	}
+	else if (g_Player.position.x + g_Player.center.x + 1 > 40)//오른쪽 경계선을 넘을 경우
+	{
+	}
+	else 
+	{
+		ScreenPrint(printX, g_Player.position.y, g_Player.strPlayer);
+	}
+sprintf(string, "Player 좌표 : %d , %d", g_Player.position.x, g_Player.position.y);
+	ScreenPrint(0, 3, string);
+
 	ScreenFlipping();
 }
 
@@ -72,9 +91,11 @@ void KeyProcess(int key)
 {
 	switch (key)
 	{
-	case 'i':
+	case 'a':
+		g_Player.position.x--;
 		break;
-	case'j':
+	case'd':
+		g_Player.position.x++;
 		break;
 	}
 }
