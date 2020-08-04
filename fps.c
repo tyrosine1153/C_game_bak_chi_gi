@@ -7,6 +7,7 @@ void InitFPSData(FPSData** fpsData)
 	sprintf((*fpsData)->FPSTextBuffer, "FPS : %d", (*fpsData)->FrameCnt);
 	(*fpsData)->FPSOldTime = clock();
 }
+
 void DrawFPS(FPSData** fpsData)
 {
 	(*fpsData)->FrameCnt++;
@@ -19,6 +20,7 @@ void DrawFPS(FPSData** fpsData)
 	}
 	ScreenPrint(0, 0, (*fpsData)->FPSTextBuffer);
 }
+
 void DestroyFPSData(FPSData** fpsData) 
 {
 	free((*fpsData)->FPSTextBuffer);
