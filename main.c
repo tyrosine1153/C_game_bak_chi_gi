@@ -22,7 +22,16 @@ typedef struct
 	int nLength;
 }Player;
 
+typedef struct _Ball
+{
+	int isReady;//불의 상태(0 : 발사상태, 1 : 대기상태)
+	Position position;//볼의 좌표
+	clock_t movetime,oldtime;//움직이는 시간 간격지정, 마지막움직인 시간
+	//Curtime - oldtime > movetime -> 이동 알고리즘 정의
+}Ball;
+
 Player g_Player;
+Ball g_Ball;
 
 void Init()
 {
@@ -36,6 +45,11 @@ void Init()
 
 	g_Player.strPlayer = (char*)malloc(sizeof(char) * g_Player.nLength);
 	strcpy(g_Player.strPlayer, PLAYER_STR);
+
+	g_Ball.isReady = 1;
+	g_Ball.position.x = g_Player.position.x;
+	g_Ball.position.y = g_Player.position.y - 1;
+
 }
 
 void Update()
